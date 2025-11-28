@@ -334,14 +334,22 @@
       btnSalvar.textContent = 'Salvando...';
 
       try {
-        const resposta = await fetch(API_URL, {
-          method: 'POST',
-          mode: 'no-cors', // importante para evitar problemas de CORS no Apps Script
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+  const resposta = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const texto = await resposta.text();
+  console.log('Resposta da API:', texto);
+
+  setStatus('Registro salvo (ou tentativa feita). Veja o console para detalhes.', 'success');
+} catch (err) {
+  console.error('Erro no fetch:', err);
+  setStatus('Erro ao salvar. Veja o console para detalhes.', 'error');
+};
 
         // Com mode: "no-cors", não conseguimos ler a resposta,
         // então vamos assumir que deu certo se não lançar erro.
@@ -368,4 +376,5 @@
     })();
   </script>
 </body>
+
 
