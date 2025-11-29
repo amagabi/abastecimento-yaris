@@ -170,7 +170,7 @@
 
     .status {
       margin-top: 8px;
-      font-size: 08rem;
+      font-size: 0.8rem;
       min-height: 18px;
     }
 
@@ -183,7 +183,8 @@
     }
 
     .status.loading {
-      color: var(--primary-dark    }
+      color: var(--primary-dark);
+    }
 
     footer {
       margin-top: 10px;
@@ -193,7 +194,7 @@
     }
 
     @media (max-width: 480px) {
-      header1 {
+      header h1 {
         font-size: 1.3rem;
       }
       .actions {
@@ -205,20 +206,22 @@
     }
   </style>
 </head>
-<body  <div class="app-container">
+<body>
+  <div class="app-container">
     <header>
       <h1>Controle de Abastecimento</h1>
       <p>Registre e acompanhe seus abastecimentos salvos na nuvem.</p>
     </header>
 
-    <div="top-actions">
+    <div class="top-actions">
       <button type="button" class="btn-outline" id="btnPlanilha">
         Ver registros na planilha
       </button>
     </div>
 
     <div class="card">
-      <form id="abastecimentoForm        <div class="form-grid">
+      <form id="abastecimentoForm">
+        <div class="form-grid">
           <div class="form-group">
             <label for="data">Data</label>
             <input type="date" id="data" name="data" required />
@@ -227,7 +230,6 @@
           <div class="form-group">
             <label for="horaInicio">Hora Início</label>
             <input type="time" id="horaInicio" name="horaInicio" required />
-            <span class="inline-info">Opcional</span>
           </div>
 
           <div class="form-group">
@@ -298,9 +300,9 @@
 
   <script>
     // === CONFIGURAÇÕES ===
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxofG2EQ1jC-Vvy92RA8Y__HT-f_YEZkgIhV1i7qIbX0eGHeDSUicPwI4Q1B3Ud2VW9/exec'; // URL do Apps Script (termina com /exec)
-    const PLANILHA_URL = 'https://docs.google.com/spreadsheets/d/1mf_mwnD8cMrVHHhzSoLkqcIq-3ZL5W-qrIHLrirwuzU/edit?usp=sharing'; // link da planilha
-	
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxofG2EQ1jC-Vvy92RA8Y__HT-f_YEZkgIhV1i7qIbX0eGHeDSUicPwI4Q1B3Ud2VW9/exec';
+    const PLANILHA_URL = 'https://docs.google.com/spreadsheets/d/1mf_mwnD8cMrVHHhzSoLkqcIq-3ZL5W-qrIHLrirwuzU/edit?usp=sharing';
+
     const form = document.getElementById('abastecimentoForm');
     const statusEl = document.getElementById('status');
     const btnSalvar = document.getElementById('btnSalvar');
@@ -341,7 +343,7 @@
     });
 
     btnPlanilha.addEventListener('click', () => {
-      if (!PLANILHA_URL || PLANILHA_URL === 'https://docs.google.com/spreadsheets/d/1mf_mwnD8cMrVHHhzSoLkqcIq-3ZL5W-qrIHLrirwuzU/edit?usp=sharing') {
+      if (!PLANILHA_URL) {
         alert('A URL da planilha não foi configurada no código.');
         return;
       }
@@ -414,6 +416,3 @@
   </script>
 </body>
 </html>
-
-
-
