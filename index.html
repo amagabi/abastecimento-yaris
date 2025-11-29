@@ -350,58 +350,59 @@
       window.open(PLANILHA_URL, '_blank');
     });
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
 
-      const formData = new FormData(form);
+  const formData = new FormData(form);
 
-      const payload = {
-        data: formData.get('data'),
-        horaInicio: formData.get('horaInicio'),
-        horaFinal: formData.get('horaFinal'),
-        kmInicial: formData.get('kmInicial'),
-        kmFinal: formData.get('kmFinal'),
-        kmRodado: formData.get('kmRodado'),
-        localAbastecimento: formData.get('localAbastecimento'),
-        kmAbastecimento: formData.get('kmAbastecimento'),
-        litros: formData.get('litros'),
-        valor: formData.get('valor'),
-        cupom: formData.get('cupom')
-      };
+  const payload = {
+    data: formData.get('data'),
+    horaInicio: formData.get('horaInicio'),
+    horaFinal: formData.get('horaFinal'),
+    kmInicial: formData.get('kmInicial'),
+    kmFinal: formData.get('kmFinal'),
+    kmRodado: formData.get('kmRodado'),
+    localAbastecimento: formData.get('localAbastecimento'),
+    kmAbastecimento: formData.get('kmAbastecimento'),
+    litros: formData.get('litros'),
+    valor: formData.get('valor'),
+    cupom: formData.get('cupom')
+  };
 
-      if (!payload.data || !payload.horaInicio || !payload.kmInicial || !payload.kmFinal) {
-        setStatus('Preencha pelo menos Data, Hora Início, KM Inicial e KM Final.', 'error');
-        return;
-      }
+  if (!payload.data || !payload.horaInicio || !payload.kmInicial || !payload.kmFinal) {
+    setStatus('Preencha pelo menos Data, Hora Início, KM Inicial e KM Final.', 'error');
+    return;
+  }
 
-      setStatus('Salvando registro...', 'loading');
-      btnSalvar.disabled = true;
-      btnSalvar.textContent = 'Salvando...';
+  setStatus('Salvando registro...', 'loading');
+  btnSalvar.disabled = true;
+  btnSalvar.textContent = 'Salvando...';
 
-      try {
+  try {
     await fetch(API_URL, {
-    method: 'POST',
-    mode: 'no-cors', // importante para evitar bloqueio de CORS
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  });
+      method: 'POST',
+      mode: 'no-cors', // importante para evitar bloqueio de CORS
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
 
-  // Com no-cors, não conseguimos ler a resposta.
-  // Se chegou até aqui sem erro, vamos assumir que deu certo.
-  setStatus('Registro enviado. Verifique se apareceu na planilha.', 'success');
+    // Com no-cors não dá pra ler a resposta,
+    // então se chegou até aqui, assumimos que deu certo.
+    setStatus('Registro enviado. Verifique se apareceu na planilha.', 'success');
 
-  form.reset();
-  kmRodadoInput.value = '';
-  preencherDataHoje();
-} catch (err) {
-  console.error('Erro no fetch:', err);
-  setStatus('Erro ao salvar. Verifique a conexão ou a configuração da API.', 'error');
-} finally {
-  btnSalvar.disabled = false;
-  btnSalvar.textContent = 'Salvar Registro';
-};
+    form.reset();
+    kmRodadoInput.value = '';
+    preencherDataHoje();
+  } catch (err) {
+    console.error('Erro no fetch:', err);
+    setStatus('Erro ao salvar. Verifique a conexão ou a configuração da API.', 'error');
+  } finally {
+    btnSalvar.disabled = false;
+    btnSalvar.textContent = 'Salvar Registro';
+  }
+});
 
     function preencherDataHoje() {
       const hoje = new Date();
@@ -413,9 +414,10 @@
     }
 
     preencherDataHoje();
-  </script>;
+  </script>
 </body>
 </html>
+
 
 
 
