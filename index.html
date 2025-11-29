@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Controle de Abastecimento</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
   <style>
     :root {
@@ -33,38 +33,49 @@
     .app-container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 16px;
+      padding: 12px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
     header h1 {
       margin: 0;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: var(--primary-dark);
     }
 
     header p {
       margin: 4px 0 0;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .top-actions {
+      display: flex;
+      justify-content: center;
+      margin: 8px 0 14px;
+    }
+
+    .top-actions button {
+      width: 100%;
+      max-width: 260px;
     }
 
     .card {
       background: var(--card-bg);
       border-radius: 10px;
-      padding: 16px;
+      padding: 12px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.06);
       border: 1px solid var(--border-color);
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
     }
 
     .form-group {
@@ -73,18 +84,18 @@
     }
 
     .form-group label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       color: var(--text-muted);
     }
 
     .form-group input,
     .form-group select {
-      padding: 8px 10px;
+      padding: 7px 9px;
       border-radius: 6px;
       border: 1px solid var(--border-color);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
@@ -95,9 +106,9 @@
     }
 
     .inline-info {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .actions {
@@ -105,20 +116,22 @@
       flex-wrap: wrap;
       gap: 8px;
       justify-content: flex-end;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
     button {
       border: none;
       border-radius: 6px;
-      padding: 8px 16px;
-      font-size: 0.95rem;
+      padding: 8px 14px;
+      font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       transition: background 0.2s, transform 0.05s, box-shadow 0.1s;
+      white-space: nowrap;
     }
 
     button:active {
@@ -145,10 +158,20 @@
       background: #dde3f0;
     }
 
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: rgba(21, 101, 192, 0.06);
+    }
+
     .status {
-      margin-top: 10px;
-      font-size: 0.85rem;
-      min-height: 20px;
+      margin-top: 8px;
+      font-size: 08rem;
+      min-height: 18px;
     }
 
     .status.success {
@@ -160,39 +183,48 @@
     }
 
     .status.loading {
-      color: var(--primary-dark);
-    }
+      color: var(--primary-dark    }
 
     footer {
-      margin-top: 16px;
+      margin-top: 10px;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
     }
 
     @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.4rem;
+      header1 {
+        font-size: 1.3rem;
+      }
+      .actions {
+        justify-content: center;
+      }
+      .actions button {
+        flex: 1 1 45%;
       }
     }
   </style>
 </head>
-<body>
-  <div class="app-container">
+<body  <div class="app-container">
     <header>
       <h1>Controle de Abastecimento</h1>
-      <p>Registre suas informações de abastecimento de forma rápida e segura.</p>
+      <p>Registre e acompanhe seus abastecimentos salvos na nuvem.</p>
     </header>
 
+    <div="top-actions">
+      <button type="button" class="btn-outline" id="btnPlanilha">
+        Ver registros na planilha
+      </button>
+    </div>
+
     <div class="card">
-      <form id="abastecimentoForm">
-        <div class="form-grid">
+      <form id="abastecimentoForm        <div class="form-grid">
           <div class="form-group">
             <label for="data">Data</label>
             <input type="date" id="data" name="data" required />
           </div>
 
-          <div class="form-group">
+          <div class="-group">
             <label for="horaInicio">Hora Início</label>
             <input type="time" id="horaInicio" name="horaInicio" required />
           </div>
@@ -259,19 +291,20 @@
     </div>
 
     <footer>
-      Controle de Abastecimento • Seus dados ficam salvos na nuvem (Google Sheets).
+      Controle de Abastecimento • Dados salvos em Google Sheets (nuvem).
     </footer>
   </div>
 
   <script>
-    // === CONFIGURAÇÃO ===
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxofG2EQ1jC-Vvy92RA8Y__HT-f_YEZkgIhV1i7qIbX0eGHeDSUicPwI4Q1B3Ud2VW9/exec'; // coloque aqui a URL do Apps Script (termina com /exec)
-    const PLANILHA_URL = 'https://docs.google.com/spreadsheets/d/1mf_mwnD8cMrVHHhzSoLkqcIq-3ZL5W-qrIHLrirwuzU/edit?gid=0#gid=0';
-    
+    // === CONFIGURAÇÕES ===
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxofG2EQ1jC-Vvy92RA8Y__HT-f_YEZkgIhV1i7qIbX0eGHeDSUicPwI4Q1B3Ud2VW9/exec'; // URL do Apps Script (termina com /exec)
+    const PLANILHA_URL = 'https://docs.google.com/spreadsheets/d/1mf_mwnD8cMrVHHhzSoLkqcIq-3ZL5W-qrIHLrirwuzU/edit?gid=0#gid=0'; // link da planilha
+	
     const form = document.getElementById('abastecimentoForm');
     const statusEl = document.getElementById('status');
     const btnSalvar = document.getElementById('btnSalvar');
     const btnLimpar = document.getElementById('btnLimpar');
+    const btnPlanilha = document.getElementById('btnPlanilha');
 
     const kmInicialInput = document.getElementById('kmInicial');
     const kmFinalInput = document.getElementById('kmFinal');
@@ -302,7 +335,16 @@
         form.reset();
         kmRodadoInput.value = '';
         setStatus('', '');
+        preencherDataHoje();
       }
+    });
+
+    btnPlanilha.addEventListener('click', () => {
+      if (!PLANILHA_URL || PLANILHA_URL === 'https://docs.google.com/spreadsheets/d/1mf_mwnD8cMrVHHhzSoLkqcIq-3ZL5W-qrIHLrirwuzU/edit?gid=0#gid=0') {
+        alert('A URL da planilha não foi configurada no código.');
+        return;
+      }
+      window.open(PLANILHA_URL, '_blank');
     });
 
     form.addEventListener('submit', async (event) => {
@@ -334,30 +376,23 @@
       btnSalvar.textContent = 'Salvando...';
 
       try {
-  const resposta = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  });
+        const resposta = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
 
-  const texto = await resposta.text();
-  console.log('Resposta da API:', texto);
+        const texto = await resposta.text();
+        console.log('Resposta da API:', texto);
+        setStatus('Registro enviado. Verifique se apareceu na planilha.', 'success');
 
-  setStatus('Registro salvo (ou tentativa feita). Veja o console para detalhes.', 'success');
-} catch (err) {
-  console.error('Erro no fetch:', err);
-  setStatus('Erro ao salvar. Veja o console para detalhes.', 'error');
-};
-
-        // Com mode: "no-cors", não conseguimos ler a resposta,
-        // então vamos assumir que deu certo se não lançar erro.
-        setStatus('Registro salvo com sucesso!', 'success');
         form.reset();
         kmRodadoInput.value = '';
+        preencherDataHoje();
       } catch (err) {
-        console.error(err);
+        console.error('Erro no fetch:', err);
         setStatus('Erro ao salvar. Verifique a conexão ou a configuração da API.', 'error');
       } finally {
         btnSalvar.disabled = false;
@@ -365,16 +400,16 @@
       }
     });
 
-    // Preencher data de hoje automaticamente
-    (function preencherDataHoje() {
+    function preencherDataHoje() {
       const hoje = new Date();
       const ano = hoje.getFullYear();
       const mes = String(hoje.getMonth() + 1).padStart(2, '0');
       const dia = String(hoje.getDate()).padStart(2, '0');
       const dataInput = document.getElementById('data');
       dataInput.value = `${ano}-${mes}-${dia}`;
-    })();
+    }
+
+    preencherDataHoje();
   </script>
 </body>
-
-
+</html>
