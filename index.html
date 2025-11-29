@@ -379,29 +379,29 @@
       btnSalvar.textContent = 'Salvando...';
 
       try {
-        const resposta = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+    await fetch(API_URL, {
+    method: 'POST',
+    mode: 'no-cors', // importante para evitar bloqueio de CORS
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
 
-        const texto = await resposta.text();
-        console.log('Resposta da API:', texto);
-        setStatus('Registro enviado. Verifique se apareceu na planilha.', 'success');
+  // Com no-cors, não conseguimos ler a resposta.
+  // Se chegou até aqui sem erro, vamos assumir que deu certo.
+  setStatus('Registro enviado. Verifique se apareceu na planilha.', 'success');
 
-        form.reset();
-        kmRodadoInput.value = '';
-        preencherDataHoje();
-      } catch (err) {
-        console.error('Erro no fetch:', err);
-        setStatus('Erro ao salvar. Verifique a conexão ou a configuração da API.', 'error');
-      } finally {
-        btnSalvar.disabled = false;
-        btnSalvar.textContent = 'Salvar Registro';
-      }
-    });
+  form.reset();
+  kmRodadoInput.value = '';
+  preencherDataHoje();
+} catch (err) {
+  console.error('Erro no fetch:', err);
+  setStatus('Erro ao salvar. Verifique a conexão ou a configuração da API.', 'error');
+} finally {
+  btnSalvar.disabled = false;
+  btnSalvar.textContent = 'Salvar Registro';
+});
 
     function preencherDataHoje() {
       const hoje = new Date();
@@ -416,3 +416,4 @@
   </script>
 </body>
 </html>
+
